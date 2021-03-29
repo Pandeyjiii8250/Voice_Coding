@@ -1,11 +1,14 @@
 const electron = require('electron');
+const { channels } = require('../src/shared/constants');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
 
 const path = require('path');
 const url = require('url');
+// const fs = require("fs");
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -19,20 +22,22 @@ function createWindow() {
         height: 600,
         backgroundColor: "white",
         webPreferences: {
-            nodeIntegration: false,
-            worldSafeExecuteJavaScript: true,
-            contextIsolation: true
-        }
+            nodeIntegration: false, // is default value after Electron v5
+            contextIsolation: true, // protect against prototype pollution
+            enableRemoteModule: false, // turn off remote
+            preload: path.join(__dirname + "/preload.js") // use a preload script
+          }
     });
 
-    const startUrl = process.env.ELECTRON_START_URL || url.format({
-        pathname: path.join(__dirname, '../index.html'),
-        protocol: 'file:',
-        slashes: true,
-      });
+    // const startUrl = process.env.ELECTRON_START_URL || url.format({
+    //     pathname: path.join(__dirname, '../public/index.html'),
+    //     protocol: 'file:',
+    //     slashes: true,
+    // });
 
     // and load the index.html of the app.
     mainWindow.loadURL("http://localhost:3000");
+    // mainWindow.loadURL(startUrl);
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
 
@@ -69,3 +74,10 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.on(channels.APP_INFO, (event) => {
+    event.sender.send(channels.APP_INFO, {
+      appName: app.getName(),
+      appVersion: app.getVersion(),
+    });
+  });
