@@ -1,68 +1,39 @@
-import React from 'react';
+import React, {useState,useRef} from 'react';
+// import Editor from './Editor'
 
-import logo from './logo.svg';
 import './App.css';
-
-
-import { channels } from '../shared/constants';
-// const { ipcRenderer } = window;
-// import { ipcRenderer } from 'electron';
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      appName: '',
-      appVersion: '',
-    };
-    
-  }
-
-  componentDidMount(){
-    if(window.isElectron){
-      console.log(window.ipcRenderer);
-      const ipcRenderer = window.ipcRenderer;
-      ipcRenderer.send(channels.APP_INFO);
-      ipcRenderer.on(channels.APP_INFO, (event, arg) => {
-      ipcRenderer.removeAllListeners(channels.APP_INFO);
-      const { appName, appVersion } = arg;
-      this.setState({ appName, appVersion });
-    });
-    }
-  }
+import MonEditor from './MonEditor';
 
 
 
-  render() {
-    const { appName, appVersion } = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>{appName} version {appVersion}</p>
-        </header>
+function App() {
+  // const [newData, setData] = useState('');
+  const [pythonUpdate, setPythonUpdate] = useState('Hellow');
+
+  // window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
+  //   console.log(`Received ${data} from main process`);
+  //   if(data.includes('Sorry') | data.includes("Speak")){
+  //     setPythonUpdate(data)
+  //   }else{
+  //     const x = newData + data
+  //     setData(x)
+  //   }
+  // })
+
+  return (
+    <div className="App">
+        {/* <button id="imp-btn" onClick={()=>{
+          window.myElect.notificationApi.sendNotification("my custom notification");
+        }}>Click Me</button> */}
+        <button id="imp-btn">Click Me</button>
+      <div className="editor">
+        <p>{pythonUpdate}</p>
+        {/* <Editor enterVal={newData}/> */}
+        {/* <MonEditor enterVal={newData} setVal={setData}/> */}
+        <MonEditor />
       </div>
-    );
-  }
-
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
+    </div>
+  );
 }
 
 export default App;

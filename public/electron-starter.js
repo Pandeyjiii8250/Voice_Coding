@@ -1,5 +1,6 @@
 const electron = require('electron');
 const { channels } = require('../src/shared/constants');
+const {runServer} = require('./../linkers/testing')
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -75,9 +76,22 @@ app.on('activate', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on(channels.APP_INFO, (event) => {
-    event.sender.send(channels.APP_INFO, {
-      appName: app.getName(),
-      appVersion: app.getVersion(),
+ipcMain.on('notify', (event, msg) => {
+    console.log(msg);
+    // console.log(event);
+    var {PythonShell} = require('python-shell');
+
+    var options={
+        scriptPath: path.join(__dirname, './../python/'),
+        args:msg
+    } 
+
+    var getText = PythonShell.run('testing2.py', options, ()=>{
+        console.log('finished')
     });
+    getText.on('message', (message)=>{
+        // ipcMain.send('fromMain', message);
+        console.log(message);
+        mainWindow.webContents.send('fromMain',message)
+    })
   });
