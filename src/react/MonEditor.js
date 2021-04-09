@@ -26,8 +26,8 @@ export default function MonEditor(props) {
     }
     window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
         console.log(`Received ${data} from main process`);
-        var res = typeof(data)
-        updateContent(res)
+        // var res = typeof(data)
+        updateContent(data)
     })
     
 
