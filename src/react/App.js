@@ -1,5 +1,4 @@
-import React, {useState,useRef} from 'react';
-// import Editor from './Editor'
+import React from 'react';
 
 import './App.css';
 import MonEditor from './MonEditor';
@@ -7,8 +6,6 @@ import MonEditor from './MonEditor';
 
 
 function App() {
-  // const [newData, setData] = useState('');
-  const [pythonUpdate, setPythonUpdate] = useState('Hellow');
 
   // window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
   //   console.log(`Received ${data} from main process`);
@@ -22,13 +19,8 @@ function App() {
 
   return (
     <div className="App">
-        {/* <button id="imp-btn" onClick={()=>{
-          window.myElect.notificationApi.sendNotification("my custom notification");
-        }}>Click Me</button> */}
-        <button id="imp-btn">Click Me</button>
       <div className="editor">
-        <p>{pythonUpdate}</p>
-        {/* <Editor enterVal={newData}/> */}
+        <p>Voice Coding</p>
         {/* <MonEditor enterVal={newData} setVal={setData}/> */}
         <MonEditor />
       </div>

@@ -1,6 +1,6 @@
 const electron = require('electron');
-const { channels } = require('../src/shared/constants');
-const {runServer} = require('./../linkers/testing')
+// const { channels } = require('../src/shared/constants');
+// const {runServer} = require('./../linkers/testing')
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -8,7 +8,7 @@ const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 
 const path = require('path');
-const url = require('url');
+// const url = require('url');
 // const fs = require("fs");
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -17,7 +17,7 @@ let mainWindow;
 
 function createWindow() {
     // Create the browser window.
-    console.log(`${__dirname}`);
+    // console.log(`${__dirname}`);
     mainWindow = new BrowserWindow({
         width: 800, 
         height: 600,
@@ -77,8 +77,7 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('notify', (event, msg) => {
-    console.log(msg);
-    // console.log(event);
+    console.log('Started Python');
     var {PythonShell} = require('python-shell');
 
     var options={
@@ -87,11 +86,11 @@ ipcMain.on('notify', (event, msg) => {
     } 
 
     var getText = PythonShell.run('testing2.py', options, ()=>{
-        console.log('finished')
+        console.log('Python file is closed')
     });
+    
     getText.on('message', (message)=>{
-        // ipcMain.send('fromMain', message);
-        console.log(message);
+        // console.log(message);
         mainWindow.webContents.send('fromMain',message)
     })
   });
