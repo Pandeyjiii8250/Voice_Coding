@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const {contextBridge, ipcRenderer} = require('electron');
 // const { channels } = require('../src/shared/constants');
 // window.ipcRenderer = ipcRenderer;
 
@@ -16,6 +16,7 @@ contextBridge.exposeInMainWorld(
                     func(arg);
                 });
             }
+                
         }
     }
         

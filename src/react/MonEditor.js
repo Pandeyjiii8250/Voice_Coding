@@ -31,19 +31,32 @@ export default function MonEditor(props) {
     }
 
     window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
-        console.log(`Received ${data} from main process`);
-        console.log(editorIns.current.originalEndLineNumber)
-        editorIns.current.trigger('keyboard', 'type', {text: "best"});
-        // editorIns.current.executeEdits("my-source", 
-        //     [{ identifier: "my-ident", range: new monacoIns.current.Range(2, 2, 2, 2), text: data }]
-        // );
-        // updateContent(data)
+        console.log(`Received ${data[0]} from main process`);
+        const pos = editorIns.current.getPosition();
+        const range = new monacoIns.current.Range(
+            pos.lineNumber,
+            pos.column,
+            pos.lineNumber,
+            pos.column
+        );
+        editorIns.current.executeEdits("new-bullets", [
+            { identifier: "new-bullet", range, text: data[0] }
+        ]);
+
+        editorIns.current.setPosition({
+            lineNumber: pos.lineNumber,
+            column: pos.column + data[1]
+        });
+        editorIns.current.focus();
     })
+
+    
     
 
     return (
         <>
             <button onClick={()=>handleClick()}>Click Me</button>
+            
             <Editor
                 height="90vh"
                 defaultLanguage="python"

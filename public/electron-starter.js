@@ -25,7 +25,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false, // is default value after Electron v5
             contextIsolation: true, // protect against prototype pollution
-            enableRemoteModule: false, // turn off remote
+            enableRemoteModule: true, // turn off remote
             preload: path.join(__dirname + "/preload.js") // use a preload script
           }
     });
@@ -91,6 +91,23 @@ ipcMain.on('notify', (event, msg) => {
     
     getText.on('message', (message)=>{
         // console.log(message);
-        mainWindow.webContents.send('fromMain',message)
+        if (message === 'if'){
+            mainWindow.webContents.send('fromMain',['if():',4])
+        }else if(message ==='while'){
+            mainWindow.webContents.send('fromMain',['while():',7])
+        }else if(message === 'print'){
+            mainWindow.webContents.send('fromMain', ['print()',7])
+        }else if(message === 'for'){
+            mainWindow.webContents.send('fromMain',['for():', 6])
+        }else if(message === 'else'){
+            mainWindow.webContents.send('fromMain',['else:', 6])
+        }else if(["Speak Anything :", "converting wait", "Limits are met", "Could not identify", "Error occured"].includes(message)){
+            console.log(message)
+        }else{
+            const pos = message.length
+            mainWindow.webContents.send('fromMain',[message, pos+1])
+        }
+
+        
     })
   });
