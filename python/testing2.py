@@ -23,7 +23,7 @@ while True:
         except sr.UnknownValueError:
             print("Could not identify")
             sys.stdout.flush()
-        except:
-            print("Error occured")
-            sys.stdout.flush()
+        # except:
+        #     print("Error occured")
+        #     sys.stdout.flush()
 

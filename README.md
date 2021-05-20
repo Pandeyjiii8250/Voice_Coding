@@ -1,15 +1,15 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). And cobined with electron to run as electron app.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start-electron`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React runs [http://localhost:3000]  which furthur open an electron browser listing to localhost:3000
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.

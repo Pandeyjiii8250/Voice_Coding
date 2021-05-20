@@ -61,6 +61,7 @@ export default function MonEditor(props) {
                 height="90vh"
                 defaultLanguage="python"
                 defaultValue="'''some comment'''"
+                theme="vs-dark"
                 value={editorContent}
                 onMount={handleMount}
                 

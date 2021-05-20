@@ -21,7 +21,6 @@ function App() {
     <div className="App">
       <div className="editor">
         <p>Voice Coding</p>
-        {/* <MonEditor enterVal={newData} setVal={setData}/> */}
         <MonEditor />
       </div>
     </div>
