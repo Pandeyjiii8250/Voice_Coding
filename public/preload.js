@@ -15,6 +15,10 @@ contextBridge.exposeInMainWorld(
                 ipcRenderer.on('fromMain', (eve,arg)=>{
                     func(arg);
                 });
+            },
+            sendCancel(msg){
+                console.log('initiated '+msg[0])
+                ipcRenderer.send('kill', msg)
             }
                 
         }

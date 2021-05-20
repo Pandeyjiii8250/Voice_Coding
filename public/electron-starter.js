@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { get } = require('http');
 // const { channels } = require('../src/shared/constants');
 // const {runServer} = require('./../linkers/testing')
 // Module to control application life.
@@ -107,7 +108,11 @@ ipcMain.on('notify', (event, msg) => {
             const pos = message.length
             mainWindow.webContents.send('fromMain',[message, pos+1])
         }
+    })
 
-        
+    ipcMain.on('kill', data=>{
+        if(getText){
+            getText.kill('SIGINT')
+        }
     })
   });

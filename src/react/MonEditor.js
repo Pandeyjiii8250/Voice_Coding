@@ -30,6 +30,11 @@ export default function MonEditor(props) {
         window.myElect.notificationApi.sendNotification(["my custom notification"])
     }
 
+    function handleCancel(){
+        window.myElect.notificationApi.sendCancel(['Kill'])
+    }
+
+
     window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
         console.log(`Received ${data[0]} from main process`);
         const pos = editorIns.current.getPosition();
@@ -56,6 +61,7 @@ export default function MonEditor(props) {
     return (
         <>
             <button onClick={()=>handleClick()}>Click Me</button>
+            <button onClick={()=>handleCancel()}>Cancel</button>
             
             <Editor
                 height="90vh"
