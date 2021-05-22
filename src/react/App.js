@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <div className="editor">
-        <p>Voice Coding</p>
+        {/* <p>Voice Coding</p> */}
         <MonEditor />
       </div>
     </div>

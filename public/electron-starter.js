@@ -104,6 +104,7 @@ ipcMain.on('notify', (event, msg) => {
             mainWindow.webContents.send('fromMain',['else:', 6])
         }else if(["Speak Anything :", "converting wait", "Limits are met", "Could not identify", "Error occured"].includes(message)){
             console.log(message)
+            mainWindow.webContents.send('fromMainProcessInfo', message)
         }else{
             const pos = message.length
             mainWindow.webContents.send('fromMain',[message, pos+1])
@@ -113,6 +114,7 @@ ipcMain.on('notify', (event, msg) => {
     ipcMain.on('kill', data=>{
         if(getText){
             getText.kill('SIGINT')
+
         }
     })
   });

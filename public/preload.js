@@ -19,6 +19,11 @@ contextBridge.exposeInMainWorld(
             sendCancel(msg){
                 console.log('initiated '+msg[0])
                 ipcRenderer.send('kill', msg)
+            },
+            processInfo(func){
+                ipcRenderer.on('fromMainProcessInfo', (eve, args)=>{
+                    func(args)
+                })
             }
                 
         }

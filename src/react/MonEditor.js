@@ -1,10 +1,14 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import Editor from '@monaco-editor/react'
+
+import PowerBtn from './PowerBtn'
+
 
 export default function MonEditor(props) {
 
     // const [editorContent, updateContent] = useState('')
     var editorContent;
+    const [processInfo, updateProcess] = useState('Waiting to Start')
     const editorIns = useRef()
     const monacoIns = useRef()
 
@@ -34,6 +38,11 @@ export default function MonEditor(props) {
         window.myElect.notificationApi.sendCancel(['Kill'])
     }
 
+    window.myElect.notificationApi.processInfo(data=>{
+        updateProcess(data)
+        console.log(data)
+    })
+
 
     window.myElect.notificationApi.receiveNotificatoin("fromMain", (data)=>{
         console.log(`Received ${data[0]} from main process`);
@@ -60,17 +69,18 @@ export default function MonEditor(props) {
 
     return (
         <>
-            <button onClick={()=>handleClick()}>Click Me</button>
-            <button onClick={()=>handleCancel()}>Cancel</button>
-            
+            {/* <p>{processInfo}</p> */}
+            {/* <button onClick={()=>handleClick()}>Click Me</button> */}
+            {/* <button onClick={()=>handleCancel()}>Cancel</button> */}
+            <PowerBtn></PowerBtn>
             <Editor
                 height="90vh"
+                lineNumber="true"
                 defaultLanguage="python"
                 defaultValue="'''some comment'''"
                 theme="vs-dark"
                 value={editorContent}
                 onMount={handleMount}
-                
             />
             
         </>
