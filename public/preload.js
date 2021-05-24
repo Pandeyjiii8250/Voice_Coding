@@ -51,8 +51,7 @@ contextBridge.exposeInMainWorld(
                         console.log(file.filePath.toString());
                           
                         // Creating and Writing to the sample.txt file
-                        fs.writeFile(file.filePath.toString(), 
-                                     code, function (err) {
+                        fs.writeFile(file.filePath.toString(), code, function (err) {
                             if (err) throw err;
                             console.log('Saved!');
                         });

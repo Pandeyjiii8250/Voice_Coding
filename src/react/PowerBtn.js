@@ -100,7 +100,6 @@ export default function PowerBtn() {
                 <div>
                     <span id ='succResult' className="opac"></span>
                     <span id ='failResult' className="opac"></span>
-                    {/* <button onClick={addOpac}> Check func</button> */}
                 </div>
             </div>
             
