@@ -93,11 +93,11 @@
   width: 2rem;
   float: left;
   margin-left: 2px;
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
-#succResult{
-  opacity: 1;
+.opac{
+  opacity: 0.5;
 }
 
 .updateOpac{

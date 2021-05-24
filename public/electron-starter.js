@@ -93,6 +93,7 @@ ipcMain.on('notify', (event, msg) => {
     
     getText.on('message', (message)=>{
         // console.log(message);
+        const problem = processInfoList.includes(message)
         if (message === 'if'){
             mainWindow.webContents.send('fromMain',['if():',4])
         }else if(message ==='while'){
@@ -103,13 +104,17 @@ ipcMain.on('notify', (event, msg) => {
             mainWindow.webContents.send('fromMain',['for():', 6])
         }else if(message === 'else'){
             mainWindow.webContents.send('fromMain',['else:', 6])
-        }else if(processInfoList.includes(message)){
+        }else if(problem){
             console.log(message)
             let index = processInfoList.indexOf(message)
             mainWindow.webContents.send('fromMainProcessInfo', [message,index])
         }else{
             const pos = message.length
             mainWindow.webContents.send('fromMain',[message, pos+1])
+        }
+
+        if(!problem){
+            mainWindow.webContents.send('fromMainProcessInfo', [message,8])
         }
     })
 

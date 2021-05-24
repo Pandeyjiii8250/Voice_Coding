@@ -2,9 +2,10 @@ import React, {useRef} from 'react'
 import Editor from '@monaco-editor/react'
 
 import PowerBtn from './PowerBtn'
+import SaveBtn from './SaveBtn'
 
 
-export default function MonEditor(props) {
+export default function MonEditor() {
 
     // const [editorContent, updateContent] = useState('')
     var editorContent;
@@ -56,6 +57,11 @@ export default function MonEditor(props) {
         editorIns.current.focus();
     })
 
+    function saveFile(){
+        console.log("saving")
+        let code = editorIns.current.getValue()
+        window.myElect.saveApi.runDialog(code)
+    }
     
     
 
@@ -74,6 +80,7 @@ export default function MonEditor(props) {
                 value={editorContent}
                 onMount={handleMount}
             />
+            <SaveBtn saveFile = {saveFile}></SaveBtn>
             
         </>
     )

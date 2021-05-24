@@ -31,30 +31,41 @@ export default function PowerBtn() {
         }
     }
 
+    function addOpac(){
+        const fail =  document.getElementById('failResult')
+        if(!fail.classList.contains('updateOpac')){
+            fail.classList.toggle('updateOpac')
+        }
+    }
+
+    function rmvOpac(){
+        const fail =  document.getElementById('failResult')
+        if(fail.classList.contains('updateOpac')){
+            fail.classList.toggle('updateOpac')
+        }
+    }
+
     window.myElect.notificationApi.processInfo(data=>{
         console.log('Received Info')
         updateProcess(data[0])
-        // const controller = document.getElementById('controller')
-        const fail = document.getElementById('failResult')
         const pass = document.getElementById('succResult')
         if(data[1]===0){
-            console.log('Hear 1')
-            // controller.classList.toggle('playing')
             addPlaying()
-            if(fail.classList.contains('updateOpac')){
-                fail.classList.toggle('updateOpac')
-            }
+            rmvOpac()
             if(pass.classList.contains('updateOpac')){
                 pass.classList.toggle('updateOpac')
             }
         }else if(data[1]===1){
-            // controller.classList.toggle('playing')
             rmvPlaying()
         }else if(data[1]===2 || data[1]===3 || data[1]===4){
-            console.log('Hear 2')
-            fail.classList.toggle('updateOpac')
+            console.log(data[1] + 'hear')
+            addOpac()
         }else if(data[1] === 9){
             rmvPlaying()
+        }else if(data[1] === 8){
+            if(!pass.classList.contains('updateOpac')){
+                pass.classList.toggle('updateOpac')
+            }
         }
         console.log(data[1])
     })
@@ -87,8 +98,9 @@ export default function PowerBtn() {
                     <p className="update">{processInfo}</p>
                 </div>
                 <div>
-                    <span id ='succResult'></span>
-                    <span id ='failResult'></span>
+                    <span id ='succResult' className="opac"></span>
+                    <span id ='failResult' className="opac"></span>
+                    {/* <button onClick={addOpac}> Check func</button> */}
                 </div>
             </div>
             
