@@ -79,6 +79,7 @@ app.on('activate', function () {
 
 ipcMain.on('notify', (event, msg) => {
     console.log('Started Python');
+    const processInfoList = ["Speak Anything :", "converting wait", "Limits are met", "Could not identify", "Error occured"]
     var {PythonShell} = require('python-shell');
 
     var options={
@@ -102,9 +103,10 @@ ipcMain.on('notify', (event, msg) => {
             mainWindow.webContents.send('fromMain',['for():', 6])
         }else if(message === 'else'){
             mainWindow.webContents.send('fromMain',['else:', 6])
-        }else if(["Speak Anything :", "converting wait", "Limits are met", "Could not identify", "Error occured"].includes(message)){
+        }else if(processInfoList.includes(message)){
             console.log(message)
-            mainWindow.webContents.send('fromMainProcessInfo', message)
+            let index = processInfoList.indexOf(message)
+            mainWindow.webContents.send('fromMainProcessInfo', [message,index])
         }else{
             const pos = message.length
             mainWindow.webContents.send('fromMain',[message, pos+1])
@@ -114,7 +116,7 @@ ipcMain.on('notify', (event, msg) => {
     ipcMain.on('kill', data=>{
         if(getText){
             getText.kill('SIGINT')
-
+            mainWindow.webContents.send('fromMainProcessInfo', ['Click to Start',9])
         }
     })
   });

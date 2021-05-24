@@ -83,7 +83,8 @@
           box-shadow: 0 0 12px rgba(255, 238, 125, 0.8);
 }
 
-.succResult, .failResult{
+
+#succResult, #failResult{
   display: block;
   background: url('../img/passed.png') no-repeat 0 0;
   background-size: 100%;
@@ -95,7 +96,15 @@
   opacity: 0.5;
 }
 
-.failResult{
+#succResult{
+  opacity: 1;
+}
+
+.updateOpac{
+  opacity: 1;
+}
+
+#failResult{
   background: url('../img/fail.png') no-repeat 0 0;
   background-size: 100%;
 }
