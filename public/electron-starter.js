@@ -94,14 +94,64 @@ ipcMain.on('notify', (event, msg) => {
     getText.on('message', (message)=>{
         // console.log(message);
         const problem = processInfoList.includes(message)
+        // if (message === 'if'){
+        //     mainWindow.webContents.send('fromMain',['if():',4])
+        // }else if(message ==='while'){
+        //     mainWindow.webContents.send('fromMain',['while():',7])
+        // }else if(message === 'print'){
+        //     mainWindow.webContents.send('fromMain', ['print()',7])
+        // }else if(message === 'for'){
+        //     mainWindow.webContents.send('fromMain',['for():', 6])
+        // }else if(message === 'else'){
+        //     mainWindow.webContents.send('fromMain',['else:', 6])
         if (message === 'if'){
-            mainWindow.webContents.send('fromMain',['if():',4])
+            mainWindow.webContents.send('fromMain',['if():',3])
         }else if(message ==='while'){
-            mainWindow.webContents.send('fromMain',['while():',7])
+            mainWindow.webContents.send('fromMain',['while():',6])
         }else if(message === 'print'){
-            mainWindow.webContents.send('fromMain', ['print()',7])
+            mainWindow.webContents.send('fromMain', ['print()',6]) 
+        }else if(message === 'input'){
+            mainWindow.webContents.send('fromMain', ['input("")',6])
+            
+        }else if(message === 'for loop'){
+            mainWindow.webContents.send('fromMain', ['for x in  :',11])
+            
+        }else if(message === 'next'){
+            mainWindow.webContents.send('fromMain', ['\n',1])
+            
+        }else if(message === 'define function'){
+            mainWindow.webContents.send('fromMain', ['def function_():',13])
+            
+        }else if(message === 'print text'){
+            mainWindow.webContents.send('fromMain', ['print("")',6])
+            
+        }else if(message === 'try'){
+            mainWindow.webContents.send('fromMain', ['try:',4])
+            
+        }else if(message === 'except'){
+            mainWindow.webContents.send('fromMain', ['except:',7])
+            
+        }
+        else if(message === 'double inverted comma'){
+            mainWindow.webContents.send('fromMain', ['""',1])
+            
+        }else if(message === 'comma'){
+            mainWindow.webContents.send('fromMain', [',',2])
+            
+        }else if(message === 'comment'){
+            mainWindow.webContents.send('fromMain', ['#',2])
+            
+        }else if(message === 'list'){
+            mainWindow.webContents.send('fromMain', ['list_one=[]',8])
+            
+        }else if(message === 'point'){
+            mainWindow.webContents.send('fromMain', ['.',2])
+            
+        }else if(message === 'dot'){
+            mainWindow.webContents.send('fromMain', ['.',2])
+            
         }else if(message === 'for'){
-            mainWindow.webContents.send('fromMain',['for():', 6])
+            mainWindow.webContents.send('fromMain',['for():', 4])
         }else if(message === 'else'){
             mainWindow.webContents.send('fromMain',['else:', 6])
         }else if(problem){
